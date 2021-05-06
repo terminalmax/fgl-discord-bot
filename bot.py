@@ -18,6 +18,7 @@ class Bot(commands.Bot):
 
     async def on_ready(self):
         print('Logged on as {0} (ID: {0.id})'.format(self.user))
+        await bot.change_presence(activity="feelings.")
 
     async def on_command_error(self, context, exception):
         if isinstance(exception, commands.MissingRequiredArgument):
@@ -30,10 +31,15 @@ class Bot(commands.Bot):
             raise exception
 
 
-bot = Bot(intents=discord.Intents.all())
+bot = Bot(intents=discord.Intents.all(), help_command=None)
 
 
-# write general commands here
+# General Commands
+@bot.command()
+async def all_commands(ctx):
+    ctx.send(embed=discord.Embed())
+
+
 @bot.command(aliases=['Ping', 'Latency', 'latency'])
 async def ping(ctx):
     await ctx.send(f"Ping {round(bot.latency * 1000)}ms")
