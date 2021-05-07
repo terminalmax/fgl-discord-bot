@@ -1,5 +1,5 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+##!/usr/bin/env python3
+##-*- coding: utf-8 -*-
 
 
 from discord.ext import commands
@@ -18,11 +18,13 @@ class Bot(commands.Bot):
 
     async def on_ready(self):
         print('Logged on as {0} (ID: {0.id})'.format(self.user))
-        await bot.change_presence(activity="feelings.")
+        await bot.change_presence(activity=discord.Game("with feelings."))
 
     async def on_command_error(self, context, exception):
         if isinstance(exception, commands.MissingRequiredArgument):
             await context.send("Missing Arguments.")
+        elif isinstance(exception, commands.errors.MissingRole):
+            await context.send("You do not have the required roles.")
         elif isinstance(exception, commands.CommandNotFound):
             await context.send("Command not found.")
         elif isinstance(exception, ValueError):
@@ -34,15 +36,20 @@ class Bot(commands.Bot):
 bot = Bot(intents=discord.Intents.all(), help_command=None)
 
 
-# General Commands
+## General Commands
+
+#Display all commands
 @bot.command()
-async def all_commands(ctx):
-    ctx.send(embed=discord.Embed())
+async def helpme(ctx):
+    ctx.send(embed=discord.Embed(title="tobeimplemented"))
 
-
+#Get bot Ping
 @bot.command(aliases=['Ping', 'Latency', 'latency'])
 async def ping(ctx):
     await ctx.send(f"Ping {round(bot.latency * 1000)}ms")
 
+#Reload Cog
+async def reload_cog(ctx):
+    await ctx.send("tobeimplemented")
 
 bot.run(config.token)
