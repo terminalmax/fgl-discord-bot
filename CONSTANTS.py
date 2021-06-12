@@ -60,9 +60,11 @@ ALL_TIME_ZONES = {
         "ANTARCTICA_TIME_ZONES" : ['Antarctica/Casey', 'Antarctica/Davis', 'Antarctica/DumontDUrville', 'Antarctica/Macquarie', 'Antarctica/Mawson', 'Antarctica/McMurdo', 'Antarctica/Palmer', 'Antarctica/Rothera', 
         'Antarctica/South_Pole', 'Antarctica/Syowa', 'Antarctica/Troll', 'Antarctica/Vostok'],
         
-        "ARTIC_TIME_ZONES" : ['Arctic/Longyearbyen']
+        "ARCTIC_TIME_ZONES" : ['Arctic/Longyearbyen']
     }
 
 YES_EMOJI = '<:adamk:795635519068962856>'
 NO_EMOJI = '<:adampain:799714808496128080>'
 CANCEL_EMOJI = '<:Yousy:777870474826874900>'
+
+ROOM_CATEGORY_ID = 802926070491381780
