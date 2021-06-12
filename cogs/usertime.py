@@ -1,5 +1,5 @@
 import json
-from datetime import datetime
+from datetime import datetime,timedelta
 import pytz
 import asyncio
 import itertools
@@ -18,8 +18,8 @@ class UsersTime(commands.Cog):
         self.client = client
         self.MESSAGE_LINK = None
 
-
-    #Displaying all timezones
+    ## Commands
+    # Displaying all timezones
     @commands.has_role("Admin")
     @commands.command()
     async def get_timezone_list(self, ctx):
@@ -45,7 +45,7 @@ class UsersTime(commands.Cog):
 
     @commands.has_role("Admin")
     @commands.command()
-    async def getTime(self, ctx, user_name=None):
+    async def getTime(self, ctx, after=None):
         with open('Data/timezones.json', 'r') as read_file:
             zones = json.load(read_file)
             embedVar = discord.Embed(title='Time')
@@ -53,7 +53,12 @@ class UsersTime(commands.Cog):
                 try:
                     name = ctx.guild.get_member(int(user_id)).display_name
                     date = datetime.now(pytz.timezone(zones[user_id]))
+                    if after is not None:
+                        date = date + timedelta(hours=int(after))
+
                     embedVar.add_field(name=name, value=date.strftime("%Y/%m/%d %I:%M %p"), inline=False)
+                except ValueError:
+                    ctx.send("Invalid Time!")
                 except AttributeError:
                     continue
             await ctx.send(embed=embedVar)
@@ -83,7 +88,7 @@ class UsersTime(commands.Cog):
             except IndexError:
                 await ctx.send("Index Error!")
                 
-    #To hold quick votes
+    # To hold quick votes
     @commands.has_role("Admin")
     @commands.command()
     async def quickvote(self, ctx, voteTitle, duration):
