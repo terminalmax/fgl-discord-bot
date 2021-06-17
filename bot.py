@@ -49,7 +49,15 @@ async def ping(ctx):
     await ctx.send(f"Ping {round(bot.latency * 1000)}ms")
 
 #Reload Cog
-async def reload_cog(ctx):
-    await ctx.send("tobeimplemented")
+@bot.command(hidden=True)
+@commands.has_role("Admin")
+async def reload_cog(ctx, name : str):
+    try:
+        bot.unload_extension(name)
+        bot.load_extension(name)
+    except Exception as e:
+        await ctx.send(f"{e.message}")
+    else:
+        await ctx.send("Cod Reloaded!")
 
 bot.run(config.token)
