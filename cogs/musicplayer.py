@@ -16,7 +16,7 @@ class MusicPlayer(commands.Cog):
         #    favlist = json.load(mlist)
 
     @commands.has_role("Admin")
-    @commands.command():
+    @commands.command()
     async def play(self, ctx, mlink):
         pass
 
