@@ -14,7 +14,6 @@ class PeriodicMessages(commands.Cog):
     # Commands
     @commands.command()
     async def startPeriodicMessages(self, ctx, arg=None):
-        await ctx.send("Starting Periodic Messages . . . . ")
         if arg == None:
             self.message_channel = ctx.channel
         else:
@@ -27,7 +26,7 @@ class PeriodicMessages(commands.Cog):
         self.periodicMessage.stop()
 
     # Tasks
-    @tasks.loop(hours=1.0)
+    @tasks.loop(hours=8.0)
     async def periodicMessage(self):
         with open('Data/periodiclinks.json', 'r') as file:
             data = json.load(file)

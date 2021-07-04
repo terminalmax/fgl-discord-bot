@@ -9,7 +9,7 @@ class Introduction(commands.Cog):
 
 	@commands.Cog.listener()
 	async def on_ready():
-		
+		pass	
 
 	@commands.command()
 	async def introduce(self, ctx):
